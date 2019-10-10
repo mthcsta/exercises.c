@@ -1,43 +1,41 @@
 /**
- ** Criando uma função que calcula o seno
+ ** Criando uma funÃ§Ã£o que calcula o seno
  ** e a comparando com o valor dado pela Sin da biblioteca math.h
 **/
 
 #include <stdio.h>
 #include <math.h>
 
-int fatorial(n){
-    int i, r=1;
-    for(i=2; i<=n; i++)
-        r*=i;
-    return r;
-}
 double seno(double x, int terms){
-    double r=x, x1;
-    int i, p;
-    for(i=0, p=3; i<terms; i++, p+=2){
-        x1 = (pow(r,p) / fatorial(p));
-        printf("%d = \n",i%2);
-        if(i%2){
-            x += x1;
-        }else{
-            x -= x1;
-        }
+  double r=x, potencia=1*r;
+  int i, expoente, fatorial=1;
+
+  for(i=1, expoente=3; i<terms; i++, expoente+=2){
+    potencia *= r * r;
+    fatorial *= (expoente-1)*expoente;
+    if(i%2){
+      x -= potencia / fatorial;;
+    }else{
+      x += potencia / fatorial;;
     }
-    return x;
+  }
+  return x;
 }
 
 int main(){
-    double x;
-    int terms;
+  double x=0.7854;
+  int terms=5;
 
-    printf("Entre o valor de x: ",x);
-    scanf("%lf", &x);
+  // Inicio das aÃ§Ãµes do usuario
+  printf("Entre o valor de x: ",x);
+  scanf("%lf", &x);
 
-    printf("Entre o numero de termos: ",terms);
-    scanf("%d", &terms);
-    /* Fim das açoes do usuario */
-    printf("Valor aproximado: %.10lf\n", seno(x, terms));
-    printf("Valor retornado pela funcao sin: %.10lf\n", sin(x));
-    return 0;
+  printf("Entre o numero de termos: ",terms);
+  scanf("%d", &terms);
+
+  // Fim das aÃ§oes do usuario
+
+  printf("Valor aproximado: %.10lf\n", seno(x, terms));
+  printf("Valor retornado pela funcao sin: %.10lf\n", sin(x));
+  return 0;
 }
