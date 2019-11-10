@@ -31,8 +31,8 @@ int le_funcionarios(TIPO_FUNCIONARIO entradas[]){
             printf("Entre o salario do funcionario: ");
             scanf("%f", &entradas[i].salario);
             i++;
+            limpa_buffer();
         }else continua=0;
-        limpa_buffer();
     } while(i<MAXFUNC && continua);
 
     return i;
@@ -125,9 +125,11 @@ int main(){
 
     nome_arq[strlen(nome_arq)-1] = '\0';
 
-    num = le_arquivo(nome_arq, func_novo);
-
-    imprime_funcionarios(func_novo, num);
-
+    if(nome_arq[0]!='\0'){
+      num = le_arquivo(nome_arq, func_novo);
+      imprime_funcionarios(func_novo, num);
+    }else{
+      printf("\nVoce nao entrou com o nome do arquivo.\n");
+    }
     return 0;
 }
